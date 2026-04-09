@@ -47,6 +47,7 @@
           });
           container.innerHTML += `
             <div class="post">
+              ${post.image ? `<img src="${post.image}" alt="${post.title}" style="width:100%;border-radius:4px;margin-bottom:14px;">` : ''}
               <h2>${post.title}</h2>
               <h3>${date}</h3>
               <p>${post.text}</p>
