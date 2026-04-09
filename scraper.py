@@ -7,7 +7,7 @@ def scrape_wisegold():
     
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-        "Accept-Language": "es-ES,es;q=0.9",
+        "Accept-Language": "en-US,en;q=0.9",
     }
     
     response = requests.get(url, headers=headers)
@@ -16,7 +16,7 @@ def scrape_wisegold():
     match = re.search(r'<script type="application/ld\+json">(.*?)</script>', html, re.DOTALL)
     
     if not match:
-        print("No se encontró JSON-LD")
+        print("JSON-LD not found")
         return
     
     data = json.loads(match.group(1))
@@ -27,15 +27,15 @@ def scrape_wisegold():
     results = []
     for post in posts:
         results.append({
-            "titulo": post.get("headline", ""),
-            "texto": post.get("text", ""),
-            "fecha": post.get("datePublished", ""),
+            "title": post.get("headline", ""),
+            "text": post.get("text", ""),
+            "date": post.get("datePublished", ""),
             "url": post.get("url", "")
         })
     
     with open("WiseGoldLinkedInPosts.json", "w", encoding="utf-8") as f:
         json.dump(results, f, ensure_ascii=False, indent=2)
     
-    print(f"{len(results)} posts encontrados")
+    print(f"{len(results)} posts found")
 
 scrape_wisegold()
