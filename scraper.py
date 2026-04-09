@@ -1,7 +1,6 @@
 import requests
 import json
 import re
-from datetime import datetime
 
 def scrape_wisegold():
     url = "https://www.linkedin.com/company/wisegoldcapital"
@@ -14,7 +13,6 @@ def scrape_wisegold():
     response = requests.get(url, headers=headers)
     html = response.text
     
-    # Extraer el JSON-LD
     match = re.search(r'<script type="application/ld\+json">(.*?)</script>', html, re.DOTALL)
     
     if not match:
@@ -35,7 +33,7 @@ def scrape_wisegold():
             "url": post.get("url", "")
         })
     
-    with open("resultados.json", "w", encoding="utf-8") as f:
+    with open("WiseGoldLinkedInPosts.json", "w", encoding="utf-8") as f:
         json.dump(results, f, ensure_ascii=False, indent=2)
     
     print(f"{len(results)} posts encontrados")
