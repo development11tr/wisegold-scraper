@@ -36,22 +36,21 @@
 <body>
   <h1>WiseGold Weekly Pulse</h1>
   <div id="posts"></div>
-
   <script>
     fetch('https://raw.githubusercontent.com/development11tr/wisegold-scraper/main/WiseGoldLinkedInPosts.json')
       .then(r => r.json())
       .then(posts => {
         const container = document.getElementById('posts');
         posts.forEach(post => {
-          const fecha = new Date(post.fecha).toLocaleDateString('en-US', {
+          const date = new Date(post.date).toLocaleDateString('en-US', {
             year: 'numeric', month: 'long', day: 'numeric'
           });
           container.innerHTML += `
             <div class="post">
-              <h2>${post.titulo}</h2>
-              <h3>${fecha}</h3>
-              <p>${post.texto}</p>
-              <a class="ver-mas" href="${post.url}" target="_blank">Ver en LinkedIn →</a>
+              <h2>${post.title}</h2>
+              <h3>${date}</h3>
+              <p>${post.text}</p>
+              <a class="ver-mas" href="${post.url}" target="_blank">View on LinkedIn →</a>
             </div>
           `;
         });
