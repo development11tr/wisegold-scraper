@@ -2,25 +2,23 @@ name: WiseGold Scraper
 
 on:
   schedule:
-    - cron: '0 8 * * *'  # Corre todos los días a las 8am UTC
-  workflow_dispatch:  # Permite correrlo manualmente
+    - cron: '0 8 * * *'
+  workflow_dispatch:
 
 jobs:
   scrape:
     runs-on: ubuntu-latest
     
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       
       - name: Setup Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
       
       - name: Instalar dependencias
-        run: |
-          pip install playwright
-          playwright install chromium
+        run: pip install requests
       
       - name: Correr scraper
         run: python scraper.py
@@ -29,4 +27,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: resultados
-          path: resultados.json
+          path: WiseGoldLinkedInPosts.json
