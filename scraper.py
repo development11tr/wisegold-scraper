@@ -2,6 +2,16 @@ import requests
 import json
 import re
 
+def get_article_image(url, headers):
+    try:
+        response = requests.get(url, headers=headers, timeout=10)
+        match = re.search(r'<meta property="og:image" content="([^"]+)"', response.text)
+        if match:
+            return match.group(1)
+    except:
+        pass
+    return ""
+
 def scrape_wisegold():
     url = "https://www.linkedin.com/company/wisegoldcapital"
     
@@ -26,11 +36,16 @@ def scrape_wisegold():
     
     results = []
     for post in posts:
+        article_url = post.get("mainEntityOfPage", post.get("url", ""))
+        print(f"Fetching image for: {article_url}")
+        image = get_article_image(article_url, headers)
+        
         results.append({
             "title": post.get("headline", ""),
             "text": post.get("text", ""),
             "date": post.get("datePublished", ""),
-            "url": post.get("url", "")
+            "url": post.get("url", ""),
+            "image": image
         })
     
     with open("WiseGoldLinkedInPosts.json", "w", encoding="utf-8") as f:
