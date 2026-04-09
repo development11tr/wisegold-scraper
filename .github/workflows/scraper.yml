@@ -20,16 +20,16 @@ jobs:
         with:
           python-version: '3.11'
       
-      - name: Instalar dependencias
+      - name: Install dependencies
         run: pip install requests
       
-      - name: Correr scraper
+      - name: Run scraper
         run: python scraper.py
       
-      - name: Commit y push del JSON
+      - name: Commit and push JSON
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
           git add WiseGoldLinkedInPosts.json
-          git commit -m "Update WiseGoldLinkedInPosts.json" || echo "Sin cambios"
+          git commit -m "Update WiseGoldLinkedInPosts.json" || echo "No changes"
           git push
