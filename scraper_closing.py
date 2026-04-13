@@ -5,7 +5,12 @@ from datetime import datetime
 def scrape_closing():
     url = "https://sys.wisegold.app/proxies/proxy_metals.php"
     
-    response = requests.get(url, timeout=10)
+    try:
+        response = requests.get(url, timeout=10)
+    except Exception as e:
+        print(f"Connection failed: {e}")
+        return
+
     data = response.json()
     
     if not data.get("success"):
