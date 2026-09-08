@@ -3,6 +3,7 @@ name: WiseGold Closing Scraper
 on:
   schedule:
     - cron: '0 21 * * *'
+    - cron: '0 23 * * *'
   workflow_dispatch:
 
 permissions:
@@ -24,16 +25,18 @@ jobs:
         run: pip install requests
 
       - name: Run scraper
-        run: python scraper_closing.py
+        run: |
+          if [ "${{ github.event.schedule }}" = "0 23 * * *" ]; then
+            python scraper_closing.py verify
+          else
+            python scraper_closing.py
+          fi
 
       - name: Commit and push JSON
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
-          git add WiseGoldMetalPrices.json
-          git stash
-          git pull --rebase
-          git stash pop
+          git pull --rebase origin main
           git add WiseGoldMetalPrices.json
           git commit -m "Update WiseGoldMetalPrices.json" || echo "No changes"
           git push
