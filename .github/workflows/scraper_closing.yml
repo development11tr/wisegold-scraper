@@ -36,7 +36,13 @@ jobs:
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
-          git pull --rebase origin main
+
+          if [ -z "$(git status --porcelain -- WiseGoldMetalPrices.json)" ]; then
+            echo "No changes to commit"
+            exit 0
+          fi
+
           git add WiseGoldMetalPrices.json
-          git commit -m "Update WiseGoldMetalPrices.json" || echo "No changes"
+          git commit -m "Update WiseGoldMetalPrices.json"
+          git pull --rebase origin main
           git push
