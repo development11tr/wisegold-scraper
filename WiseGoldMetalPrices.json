@@ -1,5 +1,32 @@
 [
   {
+    "date": "2026-11-12",
+    "GOLD": {
+      "closing": "3993.6500",
+      "closing_timestamp": "2026-11-11T13:30:02-05:00",
+      "change": "-38.6500",
+      "change_percent": "-0.96"
+    },
+    "SILVER": {
+      "closing": "51.9720",
+      "closing_timestamp": "2026-11-11T13:25:03-05:00",
+      "change": "0.3940",
+      "change_percent": "0.77"
+    },
+    "PLATINUM": {
+      "closing": "1536.9830",
+      "closing_timestamp": "2026-11-11T13:05:02-05:00",
+      "change": "0.6720",
+      "change_percent": "0.04"
+    },
+    "PALLADIUM": {
+      "closing": "1047.2810",
+      "closing_timestamp": "2026-11-11T13:00:08-05:00",
+      "change": "11.5780",
+      "change_percent": "1.13"
+    }
+  },
+  {
     "date": "2026-11-11",
     "GOLD": {
       "closing": "4022.5600",
